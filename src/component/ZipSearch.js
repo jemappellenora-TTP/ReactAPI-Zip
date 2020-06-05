@@ -54,6 +54,7 @@ export default class ZipSearch extends Component {
       <>
         <div className="Result">
         <p>{result}</p>
+        {zipList}
         </div>
       </>
     );
