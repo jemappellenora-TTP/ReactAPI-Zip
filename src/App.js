@@ -1,33 +1,21 @@
 import React, { Component } from "react";
-import ZipSearch from "./component/ZipSearch"
+import ZipSearch from "./component/ZipSearch";
 import axios from "axios";
+import FetchCity from "./component/FetchCity";
+import Input from "./component/Input";
 
 export default class App extends Component {
   constructor(props) {
     super(props);
-    this.state = { zipCodes: [] };
+    this.state = {
+      search: "",
+      searching: true,
+    };
   }
-
-  componentDidMount() {
-    const city = this.props.cityName;
-    const url = `http://ctp-zip-api.herokuapp.com/city/${city}`;
-
-    axios
-      .get(url)
-      .then((response) => {
-        const data = response.data;
-        console.log(data);
-        const zipCodes = data;
-        this.setState({ zipCodes });
-      })
-      .catch((err) => console.log(err));
-  }
-
   render() {
     return (
       <div className="City">
-        <>current number: {this.props.city}</>
-        <ZipSearch zip={this.state.zipCodes}></ZipSearch>
+        <FetchCity />
       </div>
     );
   }
