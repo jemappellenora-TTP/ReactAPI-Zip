@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
+import ZipCard from "./ZipCard";
 
 export default class ZipSearch extends Component {
   constructor(props) {
@@ -20,8 +21,6 @@ export default class ZipSearch extends Component {
         const updateinfo = {
           name: data.LocationText,
           state: data.State,
-          locationLat: data.Lat,
-          locationLong: data.Long,
           population: data.EstimatedPopulation,
           total: data.TotalWages
         }
@@ -31,7 +30,6 @@ export default class ZipSearch extends Component {
 
 
   render() {
-    let zipList;
     if (this.state.zipCodes.length === 0) {
       zipList = <></>;
     } else {
@@ -41,11 +39,22 @@ export default class ZipSearch extends Component {
         </ol>
       );
     }
+    let zipList;
+    const result=()=>
+      this.state.zipCodes.map((each) =>{
+        return(
+          <ZipCard 
+            location= {each.LocationText},
+            population= {each.EstimatedPopulation}
+            totalwage= {each.TotalWages}
+            />
+        );
+      })
+      };
+
     return (
-      <div className="City">
-        <h1>City</h1>
-        <h3>{this.props.city}</h3>
-        {zipList}
+      <div className="Result">
+        <p>{result}</p>
       </div>
     );
   }

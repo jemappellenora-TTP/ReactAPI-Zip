@@ -18,7 +18,7 @@ export default class App extends Component {
         const data = response.data;
         console.log(data);
         const zipCodes = data;
-        this.setState({ city, zipCodes });
+        this.setState({ zipCodes });
       })
       .catch((err) => console.log(err));
   }
@@ -27,7 +27,7 @@ export default class App extends Component {
     return (
       <div className="City">
         <>current number: {this.props.city}</>
-        <ZipSearch zip={zipList}></ZipSearch>
+        <ZipSearch zip={this.state.zipCodes}></ZipSearch>
       </div>
     );
   }
